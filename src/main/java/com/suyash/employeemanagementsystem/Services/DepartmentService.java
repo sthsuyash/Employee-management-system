@@ -78,16 +78,4 @@ public interface DepartmentService {
      */
     ResponseEntity<ApiResponseDTO<?>> getDepartmentEmployees(Long departmentId, Pageable pageable)
             throws ResourceNotFoundException, ServiceLogicException;
-
-    /**
-     * Method to get an employee by id
-     *
-     * @param departmentId Long object containing the id of the department
-     * @param employeeId   Long object containing the id of the employee
-     * @return ResponseEntity<ApiResponseDTO < ?>> containing the response details
-     * @throws ResourceNotFoundException if the resource is not found
-     * @throws ServiceLogicException     if there is an issue with the service logic
-     */
-//    ResponseEntity<ApiResponseDTO<?>> getDepartmentEmployeeById(Long departmentId, Long employeeId)
-//            throws ResourceNotFoundException, ServiceLogicException;
 }

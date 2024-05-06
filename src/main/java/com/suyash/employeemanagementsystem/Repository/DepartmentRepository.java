@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface DepartmentRepository extends JpaRepository<Department, Long>, PagingAndSortingRepository<Department, Long> {
     Department findByName(String name);
 
-    @Query("SELECT d.name FROM Department d ORDER BY d.name DESC")
+    @Query("SELECT d FROM Department d ORDER BY d.name DESC")
     Page<Department> findAllOrdered(Pageable pageable);
 }

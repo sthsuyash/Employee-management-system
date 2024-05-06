@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(new ApiResponseDTO<>(ApiResponseStatus.SUCCESS.name(), "Department created successfully", null));
+                    .body(new ApiResponseDTO<>(ApiResponseStatus.SUCCESS.name(), "Department created successfully", newDepartment));
         } catch (ResourceAlreadyExistsException e) {
             log.error("Error creating department: " + e.getMessage());
             throw new ResourceAlreadyExistsException("Department with name " + newDepartmentDetails.getName() + " already exists");
@@ -107,6 +108,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                     .orElseThrow(() -> new ResourceNotFoundException("Department with id " + departmentId + " not found"));
 
             department.setName(updatedDepartmentDetails.getName());
+            department.setUpdatedAt(LocalDateTime.now());
 
             _departmentRepository.save(department);
 
@@ -148,7 +150,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             Department department = _departmentRepository.findById(departmentId)
                     .orElseThrow(() -> new ResourceNotFoundException("Department with id " + departmentId + " not found"));
 
-            // Assuming you have pagination logic implemented in your repository or service
             Page<Employee> employees = _employeeRepository.findByDepartmentId(departmentId, pageable);
 
             // Count total employees for the department

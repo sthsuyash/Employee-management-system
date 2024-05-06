@@ -38,5 +38,6 @@ public class Department {
 
     public Department(String name) {
         this.name = name;
+        this.createdAt = LocalDateTime.now();
     }
 }
